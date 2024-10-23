@@ -1,8 +1,7 @@
 <section class="w-full relative text-gray-900 p-3">
     <div class="max-w-screen-lg mx-auto py-5 flex flex-col gap-10">
         <div>
-            <h2 class="text-left text-3xl text-primary font-semibold">We are trusted</h2>
-            <span class="text-left text-sm italic text-primary font-semibold">Our Customer</span>
+            <h2 class="text-center text-3xl text-primary font-semibold">Our Customer</h2>
         </div>
 
         <div class="">

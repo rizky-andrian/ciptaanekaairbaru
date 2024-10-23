@@ -1,4 +1,4 @@
-<section class=" w-full relative text-gray-900 p-3">
+<!--<section class=" w-full relative text-gray-900 p-3">
     <div class="max-w-screen-lg mx-auto py-5 flex flex-col gap-10 ">
         <div>
             <h2 class="text-left text-3xl text-primary font-semibold">Latest News</h2>
@@ -23,10 +23,11 @@
                 </div>
             @endforeach
         </div>
-    -->
+    
         <div class="flex justify-center text-sm">
             <a href="/news" class="bg-primary text-white rounded-tl-xl rounded-br-xl">
                 <p class="py-2 px-3 ">Read All News</p>
             </a>
         </div>
 </section>
+-->

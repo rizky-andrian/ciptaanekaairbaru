@@ -32,7 +32,7 @@ class FrontPagesControlller extends Controller
         $sliders = Slider::where('slider_product', 0)->get(['slider_title', 'slider_image']);
         // dd($sliders);
         $intro = StaticPages::where('id', 1)->get(['title', 'content']);
-        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(4);
+        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(5);
         $brandDesc = StaticPages::where('id', 2)->get(['title', 'content']);
         $history = CompanyHistory::get(['tahun', 'descripiton']);
         $wCu = WhyChooseUs::get(['content']);
@@ -84,7 +84,7 @@ class FrontPagesControlller extends Controller
         // $pagesDetail = StaticPages::where('id', 4)->get(['title', 'content', 'image']);
         $brandDetail = BrandProduk::where('slugs', $slug)->get(['id', 'nama_brand', 'deskripsi_brand', 'gambar_brand'])->first();
         $produk = Produk::where('id_brand', $brandDetail->id)->with('imagesProduk')->paginate(10);
-        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(4);
+        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(5);
         $brandDesc = StaticPages::where('id', 2)->get(['title', 'content']);
         $meta = new Meta($brandDetail->nama_brand, strip_tags(Str::limit($brandDetail->deskripsi_brand, 290, '.')), '/storage/img/company/' . $companyInfo->company_logo);
         return view('brand', ['brand' => $brand, 'brandDesc' => $brandDesc[0], 'companyInfo' => $companyInfo, 'brandDetail' => $brandDetail, 'title' => Meta::getTitle(), 'produk' => $produk]);
@@ -97,7 +97,7 @@ class FrontPagesControlller extends Controller
         $companyInfo = CompanyInfo::where('id', 1)->get(['company_name', 'company_slogan', 'company_logo', 'company_address', 'company_email', 'company_phone']);
         $sliders = Slider::where('slider_product', 1)->get(['slider_title', 'slider_image']);
         $katProduk = KategoriProduk::get(['id', 'nama_kategori', 'slugs', 'gambar_produk']);
-        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(4);
+        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(5);
         $brandDesc = StaticPages::where('id', 2)->get(['title', 'content']);
         $Produk = Produk::with(['kategoriProduk', 'brandProduk', 'imagesProduk'])->orderBy('id', 'desc')->paginate(8);
         $meta = new Meta('Products' . ' - ' . $companyInfo[0]->company_name, 'Product By PT. Cipta Aneka Air, Veolia Membrane RO, Cobetter Filter, Cartridge Filter, Chemical For Water Treatment, Filteration Media', '/storage/img/company/' . $companyInfo[0]->company_logo);
@@ -111,7 +111,7 @@ class FrontPagesControlller extends Controller
         $companyInfo = CompanyInfo::where('id', 1)->get(['company_name', 'company_slogan', 'company_logo', 'company_address', 'company_email', 'company_phone',]);
         $produk = Produk::where('slugs', $slugs)->with(['kategoriProduk', 'brandProduk', 'imagesProduk'])->first();
         $D_id_kategori = $produk->id_kategori;
-        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(4);
+        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(5);
         $brandDesc = StaticPages::where('id', 2)->get(['title', 'content']);
         $pdserupa = Produk::where('id_kategori', $D_id_kategori)->with(['kategoriProduk', 'brandProduk', 'imagesProduk'])->get();
         $meta = new Meta(Str::title($produk->nama_produk), Str::limit($produk->deskripsi_produk, 290, '.'), '/storage/img/produk/' . $produk->imagesProduk[0]->gambar_produk);
@@ -128,7 +128,7 @@ class FrontPagesControlller extends Controller
         // $kategoriProduk = KategoriProduk::where('slugs', $slugs)->with(['produk'])->first();
         $DkategoriProduk = KategoriProduk::get();
         $D_id_kategori = $kategoriProduk->id;
-        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(4);
+        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(5);
         $brandDesc = StaticPages::where('id', 2)->get(['title', 'content']);
         $produk = Produk::where('id_kategori', $D_id_kategori)->with(['kategoriProduk', 'brandProduk', 'imagesProduk'])->paginate(8);
         $meta = new Meta('Distributor ' . $kategoriProduk->nama_kategori . ' di Indonesia - PT. Cipta Aneka Air',  Str::limit($kategoriProduk->deskripsi_kategori, 250, '.'), '/storage/img/kategori-produk/' . $kategoriProduk->gambar_produk);
@@ -141,7 +141,7 @@ class FrontPagesControlller extends Controller
     {
         $companyInfo = CompanyInfo::where('id', 1)->get(['company_name', 'company_slogan', 'company_logo', 'company_address', 'company_email', 'company_phone',]);
         $brandProduk = BrandProduk::where('slugs', $slugs)->with(['produk'])->first();
-        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(4);
+        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(5);
         $brandDesc = StaticPages::where('id', 2)->get(['title', 'content']);
         $meta = new Meta($brandProduk->nama_brand, Str::limit($brandProduk->deskripsi_brand, 250, '.'), '/storage/img/brand-produk/' . $brandProduk->gambar_brand);
         AnalisisPengunjung::recordVisitor($_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT'], url()->current());
@@ -173,7 +173,7 @@ class FrontPagesControlller extends Controller
     {
         $companyInfo = CompanyInfo::where('id', 1)->get(['company_name', 'company_slogan', 'company_logo', 'company_address', 'company_email', 'company_phone',]);
         // $servis = Servis::get(['judul_servis', 'slug', 'gambar_servis', 'deskripsi_servis']);
-        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(4);
+        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(5);
         $brandDesc = StaticPages::where('id', 2)->get(['title', 'content']);
         $news = BlogNews::select(["title", "slug", "content", "image"])->paginate(6);
         $meta = new Meta('News ' . ' - Update and Info ' . $companyInfo[0]->company_name, 'News & Update By' . $companyInfo[0]->company_name . ' ' . $companyInfo[0]->company_slogan, '/storage/img/company/' . $companyInfo[0]->company_logo);
@@ -186,7 +186,7 @@ class FrontPagesControlller extends Controller
     {
         $companyInfo = CompanyInfo::where('id', 1)->get(['company_name', 'company_slogan', 'company_logo', 'company_address', 'company_email', 'company_phone',]);
         $news = BlogNews::where('slug', $slugs)->first();
-        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(4);
+        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(5);
         $brandDesc = StaticPages::where('id', 2)->get(['title', 'content']);
         $meta = new Meta(Str::limit($news->title, 63, '..'), Str::limit(strip_tags($news->content), 250, '.'), '/storage/img/blog-news/' . $news->image);
         AnalisisPengunjung::recordVisitor($_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT'], url()->current());
@@ -198,7 +198,7 @@ class FrontPagesControlller extends Controller
     {
         $companyInfo = CompanyInfo::where('id', 1)->get(['company_name', 'company_slogan', 'company_logo', 'company_address', 'company_email', 'company_phone',]);
         $tentangData = StaticPages::find(5);
-        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(4);
+        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(5);
         $brandDesc = StaticPages::where('id', 2)->get(['title', 'content']);
         $intro = StaticPages::where('id', 1)->get(['title', 'content'])->first();
         $meta = new Meta('About Us ' . ' - ' . $companyInfo[0]->company_name, strip_tags(Str::limit($brandDesc[0]->content, 315, '..')), '/storage/img/company/' . $companyInfo[0]->company_logo);
@@ -212,7 +212,7 @@ class FrontPagesControlller extends Controller
         $companyInfo = CompanyInfo::where('id', 1)->get(['company_name', 'company_slogan', 'company_logo', 'company_address', 'company_email', 'company_phone',]);
         $tentangData = StaticPages::find(5);
         $companyHistory = CompanyHistory::get(['tahun', 'descripiton']);
-        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(4);
+        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(5);
         $brandDesc = StaticPages::where('id', 2)->get(['title', 'content']);
         $meta = new Meta('History of ' . $companyInfo[0]->company_name,  'The journey of PT. Cipta Aneka Air since 2008 until now has been a journey filled with struggles and problem-solving in the field of water treatment and maintenance.', '/storage/img/company/' . $companyInfo[0]->company_logo);
         AnalisisPengunjung::recordVisitor($_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT'], url()->current());
@@ -226,7 +226,7 @@ class FrontPagesControlller extends Controller
         $tentangData = StaticPages::find(5);
         $visi = StaticPages::where('id', 6)->get(['title', 'content']);
         $misi = StaticPages::where('id', 7)->get(['title', 'content']);
-        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(4);
+        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(5);
         $brandDesc = StaticPages::where('id', 2)->get(['title', 'content']);
         $meta = new Meta('About Us ' . ' - Vision & Mission ' . $companyInfo[0]->company_name, 'About Us ' . ' - Vision & Mission - ' .  $companyInfo[0]->company_name, '/storage/img/company/' . $companyInfo[0]->company_logo);
         AnalisisPengunjung::recordVisitor($_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT'], url()->current());
@@ -239,7 +239,7 @@ class FrontPagesControlller extends Controller
         $companyInfo = CompanyInfo::where('id', 1)->get(['company_name', 'company_slogan', 'company_logo', 'company_address', 'company_email', 'company_phone',]);
         $tentangData = StaticPages::find(5);
         $content =  StaticPages::where('id', 8)->get(['title', 'content']);
-        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(4);
+        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(5);
         $brandDesc = StaticPages::where('id', 2)->get(['title', 'content']);
         $meta = new Meta('About Us ' . ' - Who We Are ' .  $companyInfo[0]->company_name, 'Who We Are - ' .  $companyInfo[0]->company_name, '/storage/img/company/' . $companyInfo[0]->company_logo);
         AnalisisPengunjung::recordVisitor($_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT'], url()->current());
@@ -253,7 +253,7 @@ class FrontPagesControlller extends Controller
         $tentangData = StaticPages::find(5);
         $Customer = Customer::get();
         $Project = Project::get();
-        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(4);
+        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(5);
         $brandDesc = StaticPages::where('id', 2)->get(['title', 'content']);
         $meta = new Meta('Projects ' . ' - Handle By ' . $companyInfo[0]->company_name, 'Tentang - ' .  $companyInfo[0]->company_name, '/storage/img/company/' . $companyInfo[0]->company_logo);
         AnalisisPengunjung::recordVisitor($_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT'], url()->current());
@@ -264,7 +264,7 @@ class FrontPagesControlller extends Controller
     {
         $companyInfo = CompanyInfo::where('id', 1)->get(['company_name', 'company_slogan', 'company_logo', 'company_address', 'company_email', 'company_phone',]);
         $tentangData = StaticPages::find(5);
-        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(4);
+        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(5);
         $brandDesc = StaticPages::where('id', 2)->get(['title', 'content']);
         $meta = new Meta('We Are Hiring ' . ' - ' . $companyInfo[0]->company_name, 'Open Position On  - ' .  $companyInfo[0]->company_name, '/storage/img/company/' . $companyInfo[0]->company_logo);
         AnalisisPengunjung::recordVisitor($_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT'], url()->current());
@@ -277,7 +277,7 @@ class FrontPagesControlller extends Controller
         $dataSearch = $request->input("product-search");
         $Produk = Produk::where('nama_produk', 'like', "%{$dataSearch}%")->paginate(8);
         $companyInfo = CompanyInfo::where('id', 1)->get(['company_name', 'company_slogan', 'company_logo', 'company_address', 'company_email', 'company_phone']);
-        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(4);
+        $brand = BrandProduk::get(['slugs', 'gambar_brand'])->take(5);
         $brandDesc = StaticPages::where('id', 2)->get(['title', 'content']);
         $meta = new Meta('Search Product' . ' - ' . $dataSearch, 'Produk Pengolahan Air Bersih dan Air Limbah', '/storage/img/company/' . $companyInfo[0]->company_logo);
         AnalisisPengunjung::recordVisitor($_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT'], url()->current());
